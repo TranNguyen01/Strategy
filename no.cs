@@ -1,6 +1,12 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System;
+using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace StrategyPatternDemo.AntiPattern
 {
@@ -28,12 +34,23 @@ namespace StrategyPatternDemo.AntiPattern
 
         public void ExportAsJson(Profile userProfile)
         {
-            // Does the same thing as ExportAsXml, except with JSON output
+            var outputFilePath = Path.Combine(this.outputDirectory, $"{this.outputFileName}.json");
+            string json = JsonSerializer.Serialize(userProfile);
+            File.WriteAllText(outputFilePath, json);
         }
 
         public void ExportAsBinary(Profile userProfile)
         {
-            // Does the same thing as ExportAsXml, except with binary output
+            var outputFilePath = Path.Combine(this.outputDirectory, this.outputFileName);
+            using (var stream = File.Open(outputFilePath, FileMode.Create))
+            {
+                using (var writer = new BinaryWriter(stream, Encoding.UTF8, false))
+                {
+                    writer.Write(userProfile.Age);
+                    writer.Write(userProfile.Sex);
+                    writer.Write(userProfile.Location);
+                }
+            }
         }
     }
 }

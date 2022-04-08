@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
- public class BinaryExportStrategy : IExportStrategy
+public class BinaryExportStrategy : IExportStrategy
 {
 
     private readonly string outputDirectory;
@@ -27,3 +27,4 @@ using System.Runtime.Serialization;
         }
     }
 }
+

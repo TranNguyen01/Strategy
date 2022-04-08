@@ -20,3 +20,4 @@ public class JsonExportStrategy : IExportStrategy
         File.WriteAllText(outputFilePath, json);
     }
 }
+

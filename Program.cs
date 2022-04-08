@@ -2,10 +2,11 @@
 
 var myProfile = new Profile
 {
-    Age = 35,
-    Sex = "M",
-    Location = "London"
+    Age = 21,
+    Sex = "Male",
+    Location = "UIT"
 };
-var strategy = new XmlExportStrategy(Directory.GetCurrentDirectory(), "myProfile");
+var strategy = new JsonExportStrategy(Directory.GetCurrentDirectory(), "myProfile");
 var exporter = new ProfileExporter(strategy);
 exporter.Export(myProfile);
+
